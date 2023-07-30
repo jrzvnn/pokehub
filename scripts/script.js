@@ -49,6 +49,19 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
   }
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+  // Rest of your existing code...
+
+  // Add event listener to the "Pokedex" link
+  const pokedexLink = document.querySelector('.nav__link--btn');
+
+  pokedexLink.addEventListener('click', function (e) {
+    e.preventDefault();
+    window.location.href = 'pokedex.html';
+  });
+});
+
+
 /* ==========#{_} Tabbed component {_}#========== */
 tabsContainer.addEventListener('click', function (e) {
   const clicked = e.target.closest('.operations__tab');
@@ -232,3 +245,4 @@ const slider = () => {
   });
 };
 slider();
+
