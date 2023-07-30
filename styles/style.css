@@ -330,6 +330,8 @@ h4 {
   .operations__icon operations__icon--1 img {
     size: 2px 20px;
   }
+  
+
 
   .operations__icon img {
     border-radius: 50%;
@@ -344,6 +346,7 @@ h4 {
   font-size: 1.7rem;
   padding: 2.5rem 7rem 6.5rem 7rem;
 }
+
 
 .operations__content--active {
   display: grid;
