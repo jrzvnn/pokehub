@@ -1,0 +1,230 @@
+@font-face {
+  font-family: game-font;
+  src: url("/font/game-font.ttf") format("truetype"),
+    url("/font/game-font-webfont.woff2") format("woff2"),
+    url("/font/game-font-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Reset CSS */
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #dbdbdb;
+}
+
+/* Loader  */
+
+.loader {
+  z-index: 10;
+  position: absolute;
+  background-color: #f1f1f1;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  transition: all 0.5s ease-in;
+}
+
+.hide {
+  transform: translateY(-100%);
+}
+
+.loader-image {
+  width: 100px;
+}
+
+.loader-image:nth-child(1),
+.loader-image:nth-child(2),
+.loader-image:nth-child(3) {
+  animation: loader-animation 0.4s ease-in-out infinite alternate;
+}
+
+.loader-image:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.loader-image:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+@keyframes loader-animation {
+  to {
+    transform: translateY(-35px);
+  }
+}
+
+/* Header */
+
+header .pokedex-logo {
+  padding: 25px 0 0 25px;
+  width: 300px;
+}
+
+/* Container global pour le main */
+
+.container {
+  max-width: 1800px;
+  margin: 15px auto;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* Form style */
+
+form {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+form label {
+  display: block;
+  text-align: center;
+  margin: 10px 0;
+  font-family: "game-font", Arial, Helvetica, sans-serif;
+  font-size: 0.8em;
+}
+
+input,
+select {
+  font-family: "game-font", Arial, Helvetica, sans-serif;
+  width: 200px;
+  padding: 5px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid black;
+  cursor: pointer;
+  font-size: 0.7em;
+}
+
+input[type="reset"] {
+  background: #ffffff;
+}
+
+input[type="search"] {
+  padding: 10px;
+  cursor: auto;
+}
+
+.info-message {
+  text-align: center;
+  font-family: "Pathway Extreme", sans-serif;
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+/* Card style */
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.pokemon-card {
+  font-family: "Pathway Extreme", sans-serif;
+  box-shadow: 1px 1px 4px 0px #000000;
+  width: 200px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.1s ease-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pokemon-card:hover {
+  transform: scale(1.05);
+  box-shadow: 1px 1px 6px 1px rgba(0, 0, 0, 0.75);
+}
+
+.pokemon-identification {
+  padding: 20px;
+  font-size: 1.1em;
+}
+
+.pokemon-id {
+  font-weight: 300;
+}
+
+.pokemon-name {
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+.pokemon-image {
+  display: block;
+  margin: 0 auto;
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+
+.pokemon-type-container {
+  padding: 20px 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pokemon-type {
+  width: 75%;
+  text-align: center;
+  padding: 4px 8px;
+  background-color: rgb(241, 241, 241, 0.6);
+  border-radius: 5px;
+}
+
+/* Responsive */
+
+@media screen and (max-width: 510px) {
+  nav .pokedex-logo {
+    display: block;
+    margin: 0 auto;
+    padding: 25px 0 0 0;
+    width: 80vw;
+  }
+
+  .loader-image {
+    width: 60px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  form {
+    font-size: 0.9em;
+    gap: 10px;
+  }
+
+  .pokemon-card {
+    width: 150px;
+  }
+
+  .pokemon-identification {
+    font-size: 0.9em;
+  }
+
+  .pokemon-image {
+    width: 100px;
+  }
+
+  .pokemon-type {
+    font-size: 0.8em;
+  }
+}
