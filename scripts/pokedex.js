@@ -32,33 +32,44 @@ const infoMessage = document.querySelector('.info-message')
 
 async function fetchPokemon() {
     try {
-        const initialResponse = await fetch("https://pokeapi.co/api/v2/pokemon?limit=10000&offset=0")
-
-        if(!initialResponse.ok) {
-            throw new Error(`${initialResponse.status} Pokemon not found`)
+      const initialResponse = await fetch("https://pokeapi.co/api/v2/pokemon?limit=10000&offset=0");
+  
+      if (!initialResponse.ok) {
+        throw new Error(`${initialResponse.status} Pokemon not found`);
+      }
+  
+      const data = await initialResponse.json();
+      const fetchAllPokemon = data.results.map(pokemon => fetch(pokemon.url));
+  
+      const responses = await Promise.all(fetchAllPokemon.map(async (fetchPromise) => {
+        try {
+          const response = await fetchPromise;
+          if (!response.ok) {
+            throw new Error(`${response.status} Pokemon not found`);
+          }
+          return response.json();
+        } catch (error) {
+          console.error("Error fetching a Pokémon:", error);
+          return null;
         }
-
-        const data = await initialResponse.json()
-        const fetchAllPokemon = data.results.map(pokemon => fetch(pokemon.url))
-        const responses = await Promise.all(fetchAllPokemon)
-
-        for(const response of responses) {
-            if(!response.ok) {
-                throw new Error(`${response.status} Pokemon not found`)
-            }
-            const currentPokemon = await response.json()
-            creatingPokemon(currentPokemon)
-        }
-
-        const pokemonDisplay = pokemonArray.slice(0, pokemonToShow - 1)
-        creatingCard(pokemonDisplay)
-        loader.classList.add('hide')
+      }));
+  
+      // Filter out any null responses (failed fetches) before processing the data
+      const validResponses = responses.filter((response) => response !== null);
+  
+      for (const currentPokemon of validResponses) {
+        creatingPokemon(currentPokemon);
+      }
+  
+      const pokemonDisplay = pokemonArray.slice(0, pokemonToShow - 1);
+      creatingCard(pokemonDisplay);
+      loader.classList.add('hide');
+    } catch (error) {
+      infoMessage.textContent = `${error}`;
+      loader.classList.add('hide');
     }
-    catch (error) {
-        infoMessage.textContent = `${error}`
-        loader.classList.add('hide')
-    }
-}
+  }
+  
 
 // Création des objets pour chaque pokemon
 
